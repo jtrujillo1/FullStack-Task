@@ -1,0 +1,62 @@
+services:
+  # Servicio de autenticación (auth-service)
+  auth-service:
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000" # Puerto para auth-service
+    environment:
+      - DB_NAME=db
+      - DB_USER=root
+      - DB_PASSWORD=root
+      - DB_HOST=db
+      - JWT_SECRET=domina
+    depends_on:
+      - db
+
+  # Servicio de tareas (task-service)
+  task-service:
+    build:
+      context: ./task-service
+      dockerfile: Dockerfile
+    ports:
+      - "4001:4001" # Puerto para task-service
+    environment:
+      - DB_NAME=db
+      - DB_USER=root
+      - DB_PASSWORD=root
+      - DB_HOST=db
+      - JWT_SECRET=domina
+    depends_on:
+      - db
+
+  # Base de datos MySQL
+  db:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    volumes:
+      - db_data:/var/lib/mysql
+
+  # Frontend en React
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000" # Puerto para el frontend (React)
+    environment:
+      REACT_APP_AUTH_SERVICE_URL: http://localhost:4000/auth
+      REACT_APP_TASK_SERVICE_URL: http://localhost:4001/tasks
+    depends_on:
+      - auth-service
+      - task-service
+
+volumes:
+  db_data:
