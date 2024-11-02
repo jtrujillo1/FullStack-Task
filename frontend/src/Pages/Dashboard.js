@@ -97,22 +97,26 @@ const Dashboard = () => {
               borderRadius: "4px",
             }}
           >
-            <Typography variant="h6">{task.title}</Typography>
-            <Typography variant="body1">{task.description}</Typography>
-            <Button
-              variant="outlined"
-              color="primary"
-              onClick={() => handleOpenModal(task)}
-            >
-              Editar
-            </Button>
-            <Button
-              variant="outlined"
-              color="primary"
-              onClick={() => handleDelete(task.id)}
-            >
-              Eliminar
-            </Button>
+            <Typography variant="h4">{task.title}</Typography>
+            <Typography variant="body1" className="description">
+              {task.description}
+            </Typography>
+            <div className="buttons">
+              <Button
+                variant="outlined"
+                color="primary"
+                onClick={() => handleOpenModal(task)}
+              >
+                Editar
+              </Button>
+              <Button
+                variant="outlined"
+                color="primary"
+                onClick={() => handleDelete(task.id)}
+              >
+                Eliminar
+              </Button>
+            </div>
           </Box>
         ))}
       </Box>

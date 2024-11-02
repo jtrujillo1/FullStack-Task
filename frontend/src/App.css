@@ -10,3 +10,35 @@ select,
 textarea {
   font-family: inherit;
 }
+
+.MuiModal-root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.MuiBox-root .css-1yuhvjn {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.MuiBox-root .css-moda7x {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.description {
+  word-break: break-word;
+  text-align: justify;
+  max-width: 90%;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
